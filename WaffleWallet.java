@@ -28,7 +28,7 @@ public class WaffleWallet extends JFrame {
         frame.setVisible(true);
     }
 
-    public Waffle_Wallet(){
+    public WaffleWallet() {
         tabbedpane = new JTabbedPane();
 
         int width = 300;
