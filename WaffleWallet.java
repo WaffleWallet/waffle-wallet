@@ -8,10 +8,14 @@ import java.awt.GridLayout;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import java.awt.Color;
 
-public class WaffleWallet extends JFrame {
+public class WaffleWallet extends JFrame implements ActionListener{
     JTabbedPane tabbedpane;
     JTextField indexText;
+    
+    JPanel tabPanel1 = new JPanel();
+    JPanel tabPanel4 = new JPanel();
 
     private String[][] tabledata = {
         {"","","",""}
@@ -34,34 +38,42 @@ public class WaffleWallet extends JFrame {
         int width = 300;
         JPanel tabPanel1 = new JPanel();
         FlowLayout firstTabFlowLayout = new FlowLayout(FlowLayout.LEFT);
-        firstTabFlowLayout.setVgap(8);
-        firstTabFlowLayout.setHgap(5);
+        firstTabFlowLayout.setVgap(50);
+        firstTabFlowLayout.setHgap(15);
         tabPanel1.setLayout(firstTabFlowLayout);
+        tabPanel1.setBackground(new Color(220,220,255));
         tabPanel1.add(new JLabel("ID:   "));
-        tabPanel1.add(new JTextField(20));
+        tabPanel1.add(new JTextField(23));
         tabPanel1.add(this.createSeparator(width, 0));
         tabPanel1.add(new JLabel("BTC:"));
-        tabPanel1.add(new JTextField(10));
+        tabPanel1.add(new JTextField(23));
         tabPanel1.add(new JLabel("BTC"));
         tabPanel1.add(this.createSeparator(width, 0));
 
-
-        JPanel firstTabEndPanel = new JPanel();
-        firstTabEndPanel.setLayout(new FlowLayout());
-        firstTabEndPanel.setPreferredSize(new Dimension(width - 30, 500));
-        firstTabEndPanel.add(new JButton("SEND"));
-        tabPanel1.add(firstTabEndPanel);
-
-
         JPanel tabPanel2 = new JPanel();
+        JButton button = new JButton("SEND");
+        button.setBackground(new Color(130,230,130));
+        tabPanel2.setLayout(new FlowLayout());
+        tabPanel2.setBackground(new Color(220,220,255));
+        tabPanel2.setPreferredSize(new Dimension(width - 150, 50));
+        button.addActionListener(this);
+        tabPanel2.add(button);
+        tabPanel1.add(tabPanel2);
+
+
+        JPanel tabPanel3 = new JPanel();
 
         JTable table = new JTable(tabledata,columnNames);
         JScrollPane sp = new JScrollPane(table);
-        sp.setPreferredSize(new Dimension(275,150));
-        tabPanel2.add(sp);
+        sp.setPreferredSize(new Dimension(500,300));
+        tabPanel3.add(sp);
+        tabPanel3.setBackground(new Color(220,220,255));
 
         tabbedpane.addTab("SEND", tabPanel1);
-        tabbedpane.addTab("HISTORY", tabPanel2);
+        tabbedpane.addTab("HISTORY", tabPanel3);
+        tabbedpane.setBackgroundAt(0, new Color(150,150,225));
+        tabbedpane.setBackgroundAt(1, new Color(150,150,225));
+
 
         getContentPane().add(tabbedpane, BorderLayout.CENTER);
     }
@@ -70,5 +82,13 @@ public class WaffleWallet extends JFrame {
         JSeparator separator = new JSeparator(JSeparator.HORIZONTAL);
         separator.setPreferredSize(new Dimension(width, hight));
         return separator;
+    }
+    
+    public void actionPerformed(ActionEvent e){
+        tabPanel4.add(new JLabel("Complete!!")); 
+        tabPanel4.setLayout(new FlowLayout());
+        tabPanel4.setBackground(new Color(220,220,255));
+        tabPanel4.setPreferredSize(new Dimension(300 - 30, 500));
+        tabPanel1.add(tabPanel4);
     }
 }
